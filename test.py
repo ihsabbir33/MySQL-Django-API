@@ -1,3 +1,3 @@
 a ="h"
 b= 'c'
-print(a+" "+b)
+print(a+b)
