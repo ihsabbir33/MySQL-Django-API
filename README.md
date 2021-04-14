@@ -1,6 +1,7 @@
 CRUD Operation-RestFramework Django with MYSQL
 
 steps :
+```
 mkdir Rest-Django-Mysql
 cd Rest-Django-Mysql
 python3 -m venv env
@@ -10,6 +11,7 @@ pip install djangorestframework
 django-admin startproject myproject
 cd myproject
 python3 manage.py startapp myapp
+```
 
 We also need to setup MySQL Database engine.
 So open settings.py and change declaration of DATABASES:
