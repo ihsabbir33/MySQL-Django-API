@@ -163,16 +163,18 @@ class Registration(models.Model):
     email = models.CharField(max_length=200, blank=False, default='')
     password = models.CharField(max_length=200, blank=False, default='')
     published = models.BooleanField(default=False)
-    
+    ```
+    ```
 python3 manage.py makemigrations
 
 Migrations for 'myapp':
   myapp/migrations/0001_initial.py
     - Create model Registration
-    - 
+
+```
 Refresh the workspace, you can see new file myapp/migrations/0001_initial.py.
 It includes code to create Tutorial data model:
-
+```
 from django.db import migrations, models
 
 
