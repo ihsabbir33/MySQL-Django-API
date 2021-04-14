@@ -155,3 +155,44 @@ CORS_ORIGIN_ALLOW_ALL: If True, all origins will be accepted (not use the whitel
 CORS_ORIGIN_WHITELIST: List of origins that are authorized to make cross-site HTTP requests. Defaults to [].
 
 ```
+```
+from django.db import models
+
+class Registration(models.Model):
+    username = models.CharField(max_length=70, blank=False, default='')
+    email = models.CharField(max_length=200, blank=False, default='')
+    password = models.CharField(max_length=200, blank=False, default='')
+    published = models.BooleanField(default=False)
+    
+python3 manage.py makemigrations
+
+Migrations for 'myapp':
+  myapp/migrations/0001_initial.py
+    - Create model Registration
+    - 
+Refresh the workspace, you can see new file myapp/migrations/0001_initial.py.
+It includes code to create Tutorial data model:
+
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    initial = True
+
+    dependencies = [
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Registration',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('username', models.CharField(default='', max_length=70)),
+                ('email', models.CharField(default='', max_length=200)),
+                ('password', models.CharField(default='', max_length=200)),
+                ('published', models.BooleanField(default=False)),
+            ],
+        ),
+    ]
+   ```
