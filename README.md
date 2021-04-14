@@ -96,4 +96,62 @@ contenttypes
 sessions
  [X] 0001_initial
 ```
+Now open myapp/apps.py, you can see TutorialsConfig class (subclass of django.apps.AppConfig).
+This represents the Django app that we’ve just created with its configuration:
+```
+from django.apps import AppConfig
 
+
+class MyappConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'myapp'
+ ```
+ Don’t forget to add this app to INSTALLED_APPS array in settings.py:
+```
+INSTALLED_APPS = [
+    ...
+   'myapp.apps.MyappConfig',
+]
+```
+Configure CORS
+We need to allow requests to our Django application from other origins.
+In this example, we’re gonna configure CORS to accept requests from localhost:8081.
+
+First, install the django-cors-headers library:
+
+pip install django-cors-headers
+
+In settings.py, add configuration for CORS:
+```
+INSTALLED_APPS = [
+    ...
+    # CORS
+    'corsheaders',
+]
+```
+You also need to add a middleware class to listen in on responses:
+```
+MIDDLEWARE = [
+    ...
+    # CORS
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+```
+
+```
+python3 manage.py runserver
+```
+
+Note: CorsMiddleware should be placed as high as possible, especially before any middleware that can generate responses such as CommonMiddleware.
+
+Next, set CORS_ORIGIN_ALLOW_ALL and add the host to CORS_ORIGIN_WHITELIST:
+```
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8081',
+)
+CORS_ORIGIN_ALLOW_ALL: If True, all origins will be accepted (not use the whitelist below). Defaults to False.
+CORS_ORIGIN_WHITELIST: List of origins that are authorized to make cross-site HTTP requests. Defaults to [].
+
+```
