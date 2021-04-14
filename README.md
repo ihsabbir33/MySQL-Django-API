@@ -25,3 +25,20 @@ DATABASES = {
     }
 }
 ```
+Now we open settings.py and add Django REST framework to the INSTALLED_APPS array here.
+```
+INSTALLED_APPS = [
+    ...
+    # Django REST framework 
+    'rest_framework',
+]
+```
+Install all application dependencies:
+```
+$ pip install -r requirements.txt
+```
+CORS Headers: Since we are building a standalone API server, we need to create a white list of approved web domains that are allowed to retrieve data from our API. This is known as Cross-Origin Resource Sharing (CORS).
+granting all domains access to your API is a security issue in production, so it should only be done in a development environment. In production, you would specify the exact domains you want to grant access such as “www.aaaa.com”.
+```
+ALLOWED_HOSTS = [‘*’]
+```
