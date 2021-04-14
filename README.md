@@ -198,3 +198,46 @@ class Migration(migrations.Migration):
         ),
     ]
    ```
+```
+python3 manage.py migrate myapp
+
+Operations to perform:
+  Apply all migrations: myapp
+Running migrations:
+  Applying myapp.0001_initial... OK
+  Applying myapp.0002_auto_20210414_1848... OK
+  Applying myapp.0003_auto_20210414_1851... OK
+```
+
+```'
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydatabase         |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| sys                |
++--------------------+
+6 rows in set (0.17 sec)
+
+mysql> use mydatabase;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> describe myapp_registration;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| id        | int          | NO   | PRI | NULL    | auto_increment |
+| username  | varchar(70)  | NO   |     | NULL    |                |
+| email     | varchar(200) | NO   |     | NULL    |                |
+| password  | varchar(200) | NO   |     | NULL    |                |
+| published | tinyint(1)   | NO   |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+5 rows in set (0.02 sec)
+
+```
