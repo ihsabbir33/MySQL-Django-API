@@ -25,4 +25,27 @@ def registration_list(request):
         return JsonResponse(registration_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         count = Registration.objects.all().delete()
-        return JsonResponse({'message': '{} Tutorials were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'message': '{} Registeration were deleted successfully!'.format(count[0])}, status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def registration(request,pk):
+    print(pk)
+    try:
+        registrationObj=Registration.objects.get(pk=pk)
+        print(registrationObj)
+
+        if request.method == 'GET':
+            registration_serializer = RegistrationSerializer(registrationObj)
+            return JsonResponse(registration_serializer.data)
+        elif request.method =='PUT':
+            registration_data = JSONParser().parse(request)
+            registration_serializer = RegistrationSerializer(registrationObj,data = registration_data)
+            if registration_serializer.is_valid():
+                registration_serializer.save()
+                return JsonResponse(registration_serializer.data)
+            return JsonResponse(registration_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        elif request.method == 'DELETE':
+            registrationObj.delete()
+            return JsonResponse({'message': 'Registration was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+    except Registration.DoesNotExist:
+        return JsonResponse({'message': 'The registration does not exist'}, status=status.HTTP_404_NOT_FOUND)
