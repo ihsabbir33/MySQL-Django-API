@@ -83,13 +83,14 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mydatabase',
-        'USER':'root',
-        'PASSWORD':'Amma4994@g',
-        'HOST':'localhost',
-        'POST':'3306'
+        'NAME': 'mydatabase',      # database name you created
+        'USER': 'root',            # default XAMPP MySQL user
+        'PASSWORD': '',            # usually XAMPP root has empty password
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
+
 
 
 # Password validation
